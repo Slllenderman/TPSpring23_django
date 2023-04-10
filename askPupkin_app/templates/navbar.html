@@ -1,0 +1,84 @@
+{% load static %}
+<nav class="navbar navbar-expand-lg" style="background-color: #f1f7ff;">
+    <div class="container-xl">
+        <a class="navbar-brand mb-0" href="#">
+            <img src="{% static 'img/favicon.svg' %}" alt="" class="title d-inline-block align-text-center" />
+            AskPupkin
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Переключатель навигации">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <div class="d-flex flex-column mx-auto mt-4">
+                <div class="d-sm-none">
+                    <button type="button" class="btn btn-success mb-2">Задать вопрос</button>
+                </div>
+                <div class="d-inline-flex mt-sm-4 mt-lg-0">
+                    <form class="d-flex" role="search">
+                        <input class="form-control me-2" type="search" placeholder="Поиск" aria-label="Поиск" />
+                        <div class="dropdown mt-1">
+                            <a class="dropdown-toggle link-underline link-underline-opacity-0" href="#" role="button"
+                                id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                                <img src="{% static 'img/filter.svg' %}" alt="" width="25rem" height="25rem" />
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">Сначала новые</a></li>
+                                <li><a class="dropdown-item" href="#">Сначала популярные</a></li>
+                            </ul>
+                        </div>
+                        <button class="btn btn-outline-success mx-2" type="submit">
+                            Поиск
+                        </button>
+                    </form>
+                    <div class="d-none d-sm-block">
+                        <button type="button" class="btn btn-success ms-1">Задать вопрос</button>
+                    </div>
+                </div>
+                <div class="d-inline-flex">
+                    <div class="d-block">
+                        <div class="badge bg-secondary mt-1 d-inline-flex" height="1.5rem">
+                            <div style="margin-top: 0.2rem;">
+                                python
+                            </div>
+                            <div data-bs-theme="dark">
+                                <button type="button" class="btn-close ms-1 dark" aria-label="Close"></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <ul class="navbar-nav d-lg-none ms-auto mt-sm-1 mb-lg-0">
+                <li class="nav-item fs-light">
+                    <a class="nav-link" href="#">Настройки</a>
+                </li>
+                <li class="nav-item fs-light">
+                    <a class="nav-link" href="#">Выйти</a>
+                </li>
+            </ul>
+            <div class="d-none d-lg-inline-flex ms-auto">
+                <a href="#">
+                    <img src="{% static 'img/default_avatar.jpg' %}" alt=""
+                        class="avatar ms-3 d-inline-block align-text-center" />
+                </a>
+                <div class="container d-none d-xl-block mt-2">
+                    <div class="row fs-normal">
+                        <div>Имя пользователя</div>
+                    </div>
+                    <div class="row">
+                        <div class="col fs-light">
+                            <a class="link-underline link-underline-opacity-0" href="">
+                                Настройки
+                            </a>
+                        </div>
+                        <div class="col fs-light me-5 ps-0">
+                            <a class="link-underline link-underline-opacity-0" href="">
+                                Выйти
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
