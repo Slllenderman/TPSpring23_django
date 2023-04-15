@@ -1,0 +1,13 @@
+{% load static %}
+<nav class="navbar navbar-expand-lg" style="background-color: #f1f7ff;">
+    <div class="container-xl">
+        {% include './navIcon.html' %}
+        <div class="collapse navbar-collapse">
+            <div class="d-flex flex-column mx-auto">
+                {% include './searchForm.html' %}
+            </div>
+            {% include './navSmSettings.html' %}
+            {% include './navSettings.html' %}
+        </div>
+    </div>
+</nav>

@@ -1,0 +1,27 @@
+{% load static %}
+<div>
+    <div class="d-sm-none">
+        <button type="button" class="btn btn-success mb-2">Задать вопрос</button>
+    </div>
+    <div class="d-inline-flex mt-sm-4 mt-lg-0">
+        <form class="d-flex" role="search">
+            <input class="form-control me-2" type="search" placeholder="Поиск" aria-label="Поиск" />
+            <div class="dropdown mt-1">
+                <a class="dropdown-toggle link-underline link-underline-opacity-0" href="#" role="button"
+                    id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                    <img src="{% static 'img/filter.svg' %}" alt="" width="25rem" height="25rem" />
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">Сначала новые</a></li>
+                    <li><a class="dropdown-item" href="#">Сначала популярные</a></li>
+                </ul>
+            </div>
+            <button class="btn btn-outline-success mx-2" type="submit">
+                Поиск
+            </button>
+        </form>
+        <div class="d-none d-sm-block">
+            <button type="button" class="btn btn-success ms-1">Задать вопрос</button>
+        </div>
+    </div>
+</div>

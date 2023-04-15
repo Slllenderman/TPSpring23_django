@@ -1,0 +1,46 @@
+<div class="me-5 mb-5">
+    <div class="fs-2 fw-bold">Новый вопрос</div>
+    <form class="needs-validation" novalidate>
+        <div class="mt-4">
+            <label for="questionTitle" class="form-label fs-5">Название вопроса</label>
+            <input type="text" class="form-control" id="questionTitle" required />
+            <div class="invalid-feedback">Добавьте название вопроса</div>
+        </div>
+        <div class="mt-3">
+            <label for="questionShortDesc" class="form-label fs-5">Краткое описание</label>
+            <textarea class="form-control" id="questionShortDesc" rows="5" aria-describedby="shortDescHelper"
+                maxlength="50" required></textarea>
+            <div id="shortDescHelper" class="form-text helper">
+                Добавьте краткое описание проблемы, не более 50 символов
+            </div>
+            <div class="invalid-feedback">
+                Добавьте краткое описание проблемы, не более 50 символов
+            </div>
+        </div>
+        <div class="mt-3">
+            <label for="questionDesc" class="form-label fs-5">Полное описание</label>
+            <textarea class="form-control" id="questionDesc" rows="10" aria-describedby="DescHelper"
+                required></textarea>
+            <div id="DescHelper" class="form-text helper">
+                Добавьте полное описание проблемы, отражающее всю её суть
+            </div>
+            <div class="invalid-feedback">
+                Добавьте краткое описание проблемы, не более 50 символов
+            </div>
+        </div>
+        <div class="mt-4">
+            <label for="tags" class="form-label fs-5">Тэги</label>
+            <input type="text" class="form-control" id="tags" required pattern="([A-Za-z]+,?\s*)+"
+                aria-describedby="tagsHelper" />
+            <div id="DescHelper" class="form-text helper">
+                Добавьте тэги через запятую, например 'moon, park, pizza'
+            </div>
+            <div class="invalid-feedback">
+                Добавьте тэги через запятую, например 'moon, park, pizza'
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary mt-3">
+            Создать вопрос
+        </button>
+    </form>
+</div>

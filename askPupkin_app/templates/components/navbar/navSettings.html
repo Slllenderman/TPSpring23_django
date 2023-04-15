@@ -1,0 +1,24 @@
+{% load static %}
+<div class="d-none d-lg-inline-flex ms-auto">
+    <a href="{% url 'settings' 0 %}">
+        <img src="{% static 'img/default_avatar.jpg' %}" alt=""
+            class="avatar ms-3 d-inline-block align-text-center" />
+    </a>
+    <div class="container d-none d-xl-block mt-2">
+        <div class="row fs-normal">
+            <div>Имя пользователя</div>
+        </div>
+        <div class="row">
+            <div class="col fs-light">
+                <a class="link-underline link-underline-opacity-0" href="">
+                    Настройки
+                </a>
+            </div>
+            <div class="col fs-light me-5 ps-0">
+                <a class="link-underline link-underline-opacity-0" href="">
+                    Выйти
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
