@@ -29,14 +29,13 @@ class QuestionsManager(models.Manager):
     def get_page(self, request, order_by_rating=False, tag=None):
         page_num = get_params(request)
         questions = super().all()
-        #if tag:
-        #    questions = questions.filter(tags__name=tag)
-        #if order_by_rating:
-        #    questions = questions.order_by("rating")
-        #else:
-        #    questions = questions.order_by("creation_date")
+        page = get_page(questions, page_num)
+        if tag:
+            questions = questions.filter(tags__name=tag)
+        if order_by_rating:
+            questions = questions.order_by("-rating")
         return get_page(questions, page_num)
-
+    
 class AnswersManager(models.Manager):
     def get_page(self, request, question_id):
         page_num = get_params(request)

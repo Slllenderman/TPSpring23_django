@@ -1,0 +1,55 @@
+{% load filters %}
+{% load static %}
+<div class="d-flex flex-column mb-2">
+    <div class="d-inline-flex mb-2">
+        {% for tag in tags %}
+            <a role="button" style="font-size: 1rem;" href="{% url 'tag' tag.name %}"
+            class="badge bg-secondary align-self-end me-1 link-underline link-underline-opacity-0">
+                {{tag.name}}
+            </a>
+        {% endfor %}
+    </div>
+    <div class="d-inline-flex fw-light ">
+        Ответ дан {{date}}
+        <div class="d-flex link-underline text-primary link-underline-opacity-0 ms-1" href="#">
+            <img class="ms-sm-2 me-1" src="{% static 'img/default_avatar.jpg' %}" 
+            width="25rem" height="25rem" style="border-radius: 0.3rem;"/>
+            {{nickname}}
+        </div>
+    </div>
+    <div class="d-inline-flex {% if hideLikes %} d-sm-none {% endif %} align-items-center">
+        <div class="me-2" width="20rem" height="20rem">
+            <svg width="23px" height="20px" role="button" aria-hidden="true">
+                <g fill="none">
+                    <g transform="translate(-679.000000, -507.000000)">
+                        <g transform="translate(100.000000, 100.000000)">
+                            <g transform="translate(578.000000, 406.000000)">
+                                <g>
+                                    <path d="M0,0 L24,0 L24,24 L0,24 L0,0 Z M0,0 L24,0 L24,24 L0,24 L0,0 Z"></path>
+                                    <path d="M13.12,2.06 L7.58,7.6 C7.21,7.97 7,8.48 7,9.01 L7,19 C7,20.1 7.9,21 9,21 L18,21 C18.8,21 19.52,20.52 19.84,19.79 L23.1,12.18 C23.94,10.2 22.49,8 20.34,8 L14.69,8 L15.64,3.42 C15.74,2.92 15.59,2.41 15.23,2.05 C14.64,1.47 13.7,1.47 13.12,2.06 Z M3,21 C4.1,21 5,20.1 5,19 L5,11 C5,9.9 4.1,9 3,9 C1.9,9 1,9.9 1,11 L1,19 C1,20.1 1.9,21 3,21 Z"
+                                    style="fill: darkgrey;" onmouseover="this.style.fill='grey';"
+                                    width="36" onmouseleave="this.style.fill='darkgrey';" onclick="this.style.fill='green';"></path>
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </svg>
+        </div>
+        <div class="me-2" style="margin-top: 0.1rem;">
+            {{rating | convert_rating}}
+        </div>
+        <div width="20rem" height="20rem">
+            <svg width="6.3499999mm" height="6.3499999mm" viewBox="0 0 6.3499999 6.3499999" role="button" aria-hidden="true">
+                <g>
+                    <g transform="matrix(0.26458333,0,0,-0.26458333,0,6.3499999)"
+                    style="fill:none;fill-rule:evenodd;stroke:none;stroke-width:1">
+                    <path d="M 0,0 H 24 V 24 H 0 Z M 0,0 H 24 V 24 H 0 Z"/>
+                    <path style="fill: darkgrey;" onmouseover="this.style.fill='grey';"
+                    width="36" onmouseleave="this.style.fill='darkgrey';" onclick="this.style.fill='darkred';" d="M 13.12,2.06 7.58,7.6 C 7.21,7.97 7,8.48 7,9.01 V 19 c 0,1.1 0.9,2 2,2 h 9 c 0.8,0 1.52,-0.48 1.84,-1.21 L 23.1,12.18 C 23.94,10.2 22.49,8 20.34,8 H 14.69 L 15.64,3.42 C 15.74,2.92 15.59,2.41 15.23,2.05 14.64,1.47 13.7,1.47 13.12,2.06 Z M 3,21 c 1.1,0 2,-0.9 2,-2 V 11 C 5,9.9 4.1,9 3,9 1.9,9 1,9.9 1,11 v 8 c 0,1.1 0.9,2 2,2 z" fill="#1d1d1d"/>
+                    </g>
+                </g>
+            </svg>
+        </div>
+    </div>
+</div>

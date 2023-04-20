@@ -1,9 +1,9 @@
 {% extends "base.html" %}
-
+{% load filters %}
 {% block content %}
 	<div>
 		<div class="container-fluid mb-5">
-			{% include 'cards/question.html' with question=question isTitle=True only %}
+			{% include question|choice_format:False with question=question isTitle=True only %}
 			<div class="row me-3 mt-3">
 				<div class="d-flex flex-column">
 					<div class="fs-2">

@@ -12,7 +12,7 @@ def index(request):
     return render(request, 'index.html', context=context)
 
 def hot(request):
-    page = Question.objects.get_page(request)
+    page = Question.objects.get_page(request, order_by_rating=True)
     pagination = PaginationAccessor(page)
     context = {
         "pagination" : pagination,
@@ -22,7 +22,7 @@ def hot(request):
     return render(request, 'index.html', context=context)
 
 def tag_question(request, tag_name):
-    page = Question.objects.get_page(request)
+    page = Question.objects.get_page(request, tag=tag_name)
     pagination = PaginationAccessor(page)
     context = {
         "pagination" : pagination,

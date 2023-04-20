@@ -1,30 +1,13 @@
 {% load static %}
-{% load filters %}
 <div class="card mt-3 {% if answer.correctness %}border-success{% endif %}">
-    {% if answer.corretness %}
+    {% if answer.correctness %}
         <div class="card-header text-bg-success">Решение</div>
     {% endif %}
     <div class="card-body">
-        <p class="card-text fs-5">
+        <p class="card-text fs-5 mb-0">
             {{answer.content}}
         </p>
-        <div class="d-flex flex-column">
-            <div class="d-inline-flex align-items-center">
-                <img class="me-2" width="20rem" height="20rem" src="{% static 'img/like.svg' %}" />
-                <div class="me-2">
-                    {{ answer.rating | convert_rating }}
-                </div>
-                <img width="20rem" height="20rem" src="{% static 'img/dislike.svg' %}" />
-            </div>
-            <div class="d-block d-sm-inline-flex fw-light ">
-                Ответ дан {{answer.creation_date}}
-                <div class="d-flex link-underline text-primary link-underline-opacity-0" href="#">
-                    <img class="ms-sm-2" src="{% static 'img/default_avatar.jpg' %}" 
-                    width="25rem" height="25rem" style="border-radius: 0.3rem;"/>
-                    {{answer.author.nickname}}
-                </div>
-            </div>
-        </div>
+        {% include 'cards\cardinfo.html' with date=answer.creation_date nickname=answer.author.nickname rating=answer.rating only %}
         {% if answer.correctness %}
             <div class="d-none d-sm-block">
                 <button type="button" class="btn btn-warning mt-2">Отменить решение</button>

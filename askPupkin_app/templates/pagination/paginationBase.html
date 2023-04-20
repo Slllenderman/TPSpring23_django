@@ -7,11 +7,11 @@
     </li>
     {% if pagination.isMoreThanHalf %}
         <li class="page-item">
-            <a class="page-link fs-5" href="{% url 'index' %}?page={{pagination.first}}">{{pagination.first}}</a>
+            <a class="page-link fs-5" href="./?page={{pagination.first}}">{{pagination.first}}</a>
         </li>
         <li class="page-item disabled"><a class="page-link fs-5" href="#">...</a></li>
         <li class="page-item">
-            <a class="page-link fs-5" href="{% url 'index' %}?page={{pagination.prev}}">{{pagination.prev}}</a>
+            <a class="page-link fs-5" href="./?page={{pagination.prev}}">{{pagination.prev}}</a>
         </li>
         <li class="page-item">
             <a class="page-link fs-5" href="{% url 'index' %}?page={{pagination.current}}#">{{pagination.current}}</a>

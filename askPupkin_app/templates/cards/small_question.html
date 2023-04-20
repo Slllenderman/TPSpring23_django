@@ -3,7 +3,7 @@
 <div class="{% if isTitle is not True %}card mb-4 me-sm-5{% endif %}">
     <div class="card-body me-sm-3">
         <div class="row">
-            <div class="col-1 d-none d-sm-flex flex-column text-center justify-content-center align-items-center">
+            <div class="col-1 d-none d-sm-flex flex-column text-center align-items-center">
                 <svg role="button" aria-hidden="true" style="fill: darkgrey;" onmouseover="this.style.fill='grey';"
                     width="36" onmouseleave="this.style.fill='darkgrey';" onclick="this.style.fill='green';" height="36"
                     viewBox="0 0 36 36">
@@ -38,10 +38,7 @@
                         {{question.description}}
                     </div>
                 {% endif %}
-            </div>
-            <div class="row">
-                <div class="col-1"></div>
-                <div class="col-sm-11">
+                <div class="mt-3">
                     {% include 'cards\cardinfo.html' with date=question.creation_date nickname=question.author.nickname rating=question.rating tags=question.tags.all hideLikes=True only %}
                 </div>
             </div>

@@ -32,6 +32,8 @@ class Question(models.Model):
     author = models.ForeignKey(Profile, on_delete=models.CASCADE)
     tags = models.ManyToManyField(Tag)
     likes = GenericRelation(Like)
+    class Meta:
+        ordering = ['-creation_date']
     
 class Answer(models.Model):
     objects = AnswersManager()
