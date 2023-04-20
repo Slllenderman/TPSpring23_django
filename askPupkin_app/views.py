@@ -1,15 +1,50 @@
 from django.shortcuts import render
 from .models import *
+from .accessors import *
 
 def index(request):
     page = Question.objects.get_page(request)
-    return render(request, 'index.html', context={ 'page' : page })
+    pagination = PaginationAccessor(page)
+    context = {
+        "questions" : page.content,
+        "pagination" : pagination
+    }
+    return render(request, 'index.html', context=context)
+
+def hot(request):
+    page = Question.objects.get_page(request)
+    pagination = PaginationAccessor(page)
+    context = {
+        "pagination" : pagination,
+        "questions" : page.content,
+        "isHot" : True
+    }
+    return render(request, 'index.html', context=context)
+
+def tag_question(request, tag_name):
+    page = Question.objects.get_page(request)
+    pagination = PaginationAccessor(page)
+    context = {
+        "pagination" : pagination,
+        "questions" : page.content,
+        "isTag" : True,
+        "tagName" : tag_name
+    }
+    return render(request, 'index.html', context=context)
+
+def question(request, question_id):
+    question = Question.objects.get(pk=question_id)
+    page = Answer.objects.get_page(request, question_id)
+    pagination = PaginationAccessor(page)
+    context = {
+        "pagination" : pagination,
+        "question" : question,
+        "answers" : page.content
+    }
+    return render(request, 'question.html', context=context)
 
 def ask(request):
     return render(request, 'ask.html')
-
-def question(request, question_id):
-    return render(request, 'question.html')
 
 def settings(request, user_id):
     return render(request, 'settings.html')

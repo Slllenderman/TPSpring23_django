@@ -3,14 +3,17 @@
 {% block content %}
 	<div>
 		<div class="container-fluid mb-5">
-			{% include 'components/question.html' %}
+			{% include 'cards/question.html' with question=question isTitle=True only %}
 			<div class="row me-3 mt-3">
 				<div class="d-flex flex-column">
 					<div class="fs-2">
 						Ответы
 					</div>
+					{% for answer in answers %}
+						{% include 'cards/answer.html' with answer=answer only %}
+					{% endfor %}
 					<form class="mt-3">
-						<label for="answerTextId" class="form-label">Ваш ответ</label>
+						<label for="answerTextId" class="form-label fs-4">Ваш ответ</label>
 						<textarea class="form-control" id="answerTextId" rows="5"></textarea>
 						<button type="submit" class="btn btn-primary mt-2">Ответить</button>
 					</form>
@@ -21,5 +24,7 @@
 {% endblock %}
 
 {% block pagination %}
-	{% include 'components/pagination/pagination.html' %}
+	{% if pagination.needPagination %}
+		{% include 'pagination/pagination.html' %}
+	{% endif %}
 {% endblock %}

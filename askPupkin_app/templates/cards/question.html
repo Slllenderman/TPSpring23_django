@@ -1,0 +1,79 @@
+{% load static %}
+{% load filters %}
+<div class="{% if isTitle is not True %}card mb-4 me-sm-5{% endif %}">
+    <div class="card-body me-sm-3">
+        <div class="row">
+            <div class="col-1 d-none d-sm-flex flex-column text-center justify-content-center align-items-center">
+                <svg role="button" aria-hidden="true" style="fill: darkgrey;" onmouseover="this.style.fill='grey';"
+                    width="36" onmouseleave="this.style.fill='darkgrey';" onclick="this.style.fill='green';" height="36"
+                    viewBox="0 0 36 36">
+                    <path d="M2 25h32L18 9 2 25Z"></path>
+                </svg>
+                <div class="fs-3">
+                    {{question.rating}}
+                </div>
+                <svg role="button" aria-hidden="true" width="36" height="36" style="fill: darkgrey;"
+                    onmouseover="this.style.fill='grey';" width="36" onmouseleave="this.style.fill='darkgrey';"
+                    onclick="this.style.fill='darkred';" viewBox="0 0 36 36">
+                    <path d="M2 11h32L18 27 2 11Z"></path>
+                </svg>
+            </div>
+            <div class="col-sm-11 col-12">
+                {% if isTitle %}
+                    <div class="fs-2 fw-bold">
+                        {{question.title}}
+                    </div>
+                {% else %}
+                    <a role="button" class="fs-3 fw-semibold link-underline link-underline-opacity-0"
+                    href="{% url 'question' question.pk %}">
+                        {{question.title}}
+                    </a>
+                {% endif %}
+                {% if isTitle %}
+                    <div class="mb-2 fs-4">
+                        {{question.content}}
+                    </div>
+                {% else %}
+                    <div class="fs-5">
+                        {{question.description}}
+                    </div>
+                {% endif %}
+            </div>
+            <div class="row">
+                <div class="col-1"></div>
+                <div class="col-sm-11">
+                    <div class="d-inline-flex d-sm-none  align-items-center">
+                        <img class="me-2" width="20rem" height="20rem" src="{% static 'img/like.svg' %}" />
+                        <div class="me-2">
+                            {{question.rating}}
+                        </div>
+                        <img width="20rem" height="20rem" src="{% static 'img/dislike.svg' %}" />
+                    </div>
+                    <div class="d-flex flex-column mt-2 mt-sm-0">
+                        <div class="d-inline-flex mt-sm-2 ">
+                            Вопрос задан {{question.creation_date}}
+                            <div class="d-none d-sm-flex text-primary" href="#">
+                                <img class="ms-2 me-1" src="{% static 'img/default_avatar.jpg' %}" 
+                                width="25rem" height="25rem" style="border-radius: 0.3rem;"/>
+                                {{question.author.nickname}}
+                            </div>
+                        </div>
+                        <div class="d-flex d-sm-none mb-1 text-primary" href="#">
+                            <img src="{% static 'img/default_avatar.jpg' %}" class="me-1"
+                            width="22rem" height="22rem" style="border-radius: 0.3rem;"/>   
+                            {{question.author.nickname}}
+                        </div>
+                        <div class="d-inline-flex mt-1">
+                            {% for tag in question.tags.all %}
+                                <a role="button" style="font-size: 1rem;" href="{% url 'tag' tag.name %}"
+                                class="badge bg-secondary align-self-end me-1 link-underline link-underline-opacity-0">
+                                    {{tag.name}}
+                                </a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

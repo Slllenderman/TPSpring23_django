@@ -1,0 +1,24 @@
+{% load static %}
+<nav class="navbar navbar-expand-lg" style="background-color: #f1f7ff;">
+    <div class="container-xl">
+        <a class="navbar-brand mb-0 fs-4" href="/">
+            <img src="{% static 'img/favicon.svg' %}" alt="" class="d-inline-block align-text-center" 
+            width="70rem" height="70rem"/>
+            AskPupkin
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-label="Переключатель навигации" aria-controls="navbarSupportedContent" aria-expanded="false">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <div class="d-flex flex-column mx-auto">
+                {% include './searchForm.html' %}
+            </div>
+            <ul class="navbar-nav mb-2 mb-lg-0">
+                <li class="nav-item ">
+                    {% include './navSettings.html' %}
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

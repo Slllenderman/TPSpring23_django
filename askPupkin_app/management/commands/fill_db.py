@@ -1,14 +1,14 @@
 from django.core.management.base import BaseCommand
-from ...models import User, Profile, Tag, Question, Answer
+from django.contrib.contenttypes.models import ContentType
+from ...models import User, Profile, Tag, Question, Answer, Like
 import random
 from nickname_generator import generate
-from RandomWordGenerator import RandomWord
 
 lorem_samples = [
     #lorem5
     'Lorem ipsum dolor sit amet.', 
     #lorem7
-    'Lorem ipsum dolor sit amet contetur adicing.'
+    'Lorem ipsum dolor sit amet contetur adicing.',
     #lorem10
     'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Temporibus, distinctio.',
     #lorem15
@@ -30,6 +30,19 @@ mail_samples = [
     '@bmstu.ru'
 ]
 
+tag_samples = [
+    'c#',
+    'c++',
+    'python',
+    'ruby',
+    'go',
+    'mysql',
+    'technopark',
+    'vk',
+    'mail',
+    'pascal'
+]
+
 class Command(BaseCommand):
     def add_arguments(self, parser):
         parser.add_argument(
@@ -47,15 +60,6 @@ class Command(BaseCommand):
         except:
             return self.generate_user()
 
-    def generate_tag(self, word_generator):
-        try:
-            tag = Tag()
-            tag.name = word_generator.generate()
-            tag.save()
-            return tag
-        except:
-            return self.generate_tag()
-
     def generate_profile(self, user):
         profile = Profile()
         profile.nickname = generate()
@@ -63,68 +67,69 @@ class Command(BaseCommand):
         profile.save()
         return profile
 
+    def generate_tags(self):
+        tags = list()
+        for tag in tag_samples:
+            new_tag = Tag()
+            new_tag.name = tag
+            new_tag.save()
+            tags.append(new_tag)
+        return tags
+
     def generate_question(self, profile, tags):
         question = Question()
         question.author = profile
-        question.title = lorem_samples[0]
-        question.description = lorem_samples[random.randint(0, 1)]
-        question.content = lorem_samples[random.randint(2, 6)]
-        question.rating = 0
+        question.title = lorem_samples[random.randint(0, 3)]
+        question.description = lorem_samples[random.randint(1, 4)]
+        question.content = lorem_samples[random.randint(3, 7)]
         question.save()
         tags_num = random.randint(1, 3)
         for i in range(tags_num):
-            try:
-                tag = random.choice(tags)
-                question.tags.add(tag)
-            except:
-                pass
+            tag = random.choice(tags)
+            question.tags.add(tag)
         return question
 
     def generate_answer(self, question, profiles):
         answer = Answer()
-        try:
-            answer.author = random.choice(profiles)
-        except:
-            answer.author = random.choice(profiles)
-        answer.content = lorem_samples[random.randint(3, 6)]
+        answer.author = random.choice(profiles)
+        answer.content = lorem_samples[random.randint(2, 6)]
         answer.question = question
-        answer.rating = 0
+        isIncorrect = random.randint(0, 9)
+        if not isIncorrect:
+            answer.correctness = True
         answer.save()
         return answer
 
-    def generate_rating(self, profile, answers, questions):
+    def generate_rating(self, profile, objects):
+        object = random.choice(objects)
+        object_type = ContentType.objects.get_for_model(object)
         try:
-            answer = random.choice(answers)
-            question = random.choice(questions)
-            answer.rating += 1
-            answer.rated.add(profile.user)
-            question.rating += 1
-            question.rated.add(profile.user)
-            answer.save()
-            question.save()
+            Like.objects.create(content_type=object_type, object_id=object.id, user=profile.user)
+            object.rating += 1
+            object.author.rating += 1
+            object.save()
+            object.author.save()
         except:
             pass
 
     def handle(self, *args, **options):
         ratio = options['ratio']
-        word_generator = RandomWord(max_word_size=15, include_digits=True, special_chars=True)
-        tags = list()
+        tags = self.generate_tags()
         answers = list()
         profiles = list()
         questions = list()
-
         for i in range(ratio):
             user = self.generate_user()
             profile = self.generate_profile(user)
             profiles.append(profile)
-            tags.append(self.generate_tag(word_generator))
             for i in range(10):
                 question = self.generate_question(profile, tags)
                 questions.append(question)
                 for i in range(10):
                     answers.append(self.generate_answer(question, profiles))
-                for i in range(20):
-                    self.generate_rating(profile, answers, questions)
+                for i in range(10):
+                    self.generate_rating(profile, answers)
+                    self.generate_rating(profile, questions)
 
         
             

@@ -1,0 +1,35 @@
+{% load static %}
+<div>
+    <ul class="navbar-nav d-lg-none ms-auto mt-sm-1 mb-lg-0">
+        <li class="nav-item">
+            <a class="nav-link" href="#">Настройки</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">Выйти</a>
+        </li>
+    </ul>
+    <div class="d-none d-lg-inline-flex ms-auto">
+        <a href="{% url 'settings' 0 %}">
+            <img src="{% static 'img/default_avatar.jpg' %}" alt=""
+                class="ms-3 d-inline-block align-text-center" 
+                height="60rem" width="60rem" style="border-radius: 25rem;"/>
+        </a>
+        <div class="container d-none d-xl-block mt-2">
+            <div class="row fs-normal">
+                <div>Имя пользователя</div>
+            </div>
+            <div class="row">
+                <div class="col fs-light">
+                    <a class="link-underline link-underline-opacity-0" href="">
+                        Настройки
+                    </a>
+                </div>
+                <div class="col fs-light me-5 ps-0">
+                    <a class="link-underline link-underline-opacity-0" href="">
+                        Выйти
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
