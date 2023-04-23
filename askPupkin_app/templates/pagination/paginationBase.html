@@ -9,10 +9,12 @@
         <li class="page-item">
             <a class="page-link fs-5" href="./?page={{pagination.first}}">{{pagination.first}}</a>
         </li>
-        <li class="page-item disabled"><a class="page-link fs-5" href="#">...</a></li>
-        <li class="page-item">
-            <a class="page-link fs-5" href="./?page={{pagination.prev}}">{{pagination.prev}}</a>
-        </li>
+        {% if pagination.shortPagination is False %}
+            <li class="page-item disabled"><a class="page-link fs-5" href="#">...</a></li>
+            <li class="page-item">
+                <a class="page-link fs-5" href="./?page={{pagination.prev}}">{{pagination.prev}}</a>
+            </li>
+        {% endif %}
         <li class="page-item">
             <a class="page-link fs-5" href="{% url 'index' %}?page={{pagination.current}}#">{{pagination.current}}</a>
         </li>
@@ -20,10 +22,12 @@
         <li class="page-item">
             <a class="page-link fs-5" href="{% url 'index' %}?page={{pagination.current}}#">{{pagination.current}}</a>
         </li>
-        <li class="page-item">
-            <a class="page-link fs-5" href="{% url 'index' %}?page={{pagination.next}}">{{pagination.next}}</a>
-        </li>
-        <li class="page-item disabled"><a class="page-link fs-5" href="#">...</a></li>
+        {% if pagination.shortPagination is False %}
+            <li class="page-item">
+                <a class="page-link fs-5" href="{% url 'index' %}?page={{pagination.next}}">{{pagination.next}}</a>
+            </li>
+            <li class="page-item disabled"><a class="page-link fs-5" href="#">...</a></li>
+        {% endif %}
         <li class="page-item">
             <a class="page-link fs-5" href="{% url 'index' %}?page={{pagination.last}}">{{pagination.last}}</a>
         </li>   
