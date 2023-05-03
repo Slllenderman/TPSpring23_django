@@ -16,7 +16,7 @@ def convert_rating(rating):
 
 @register.filter
 def choice_format(question, isCard):
-    SMALL_BREACKPOINT = 140
+    SMALL_BREACKPOINT = 170
     BIG_BREACKPOINT = 600
     title_weight = 1.5
     content_weight = 1.1

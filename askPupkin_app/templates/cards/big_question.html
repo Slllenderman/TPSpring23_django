@@ -25,7 +25,7 @@
                 {% endif %}
             </div>
             <div class="row">
-                {% include 'cards\cardinfo.html' with date=question.creation_date nickname=question.author.nickname rating=question.rating tags=question.tags.all hideLikes=False only %}
+                {% include 'cards\cardinfo.html' with object=question tags=question.tags.all hideLikes=False isQuestion=True only %}
             </div>
         </div>
     </div>

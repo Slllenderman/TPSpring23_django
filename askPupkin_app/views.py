@@ -27,7 +27,7 @@ def tag_question(request, tag_name):
     context = {
         "pagination" : pagination,
         "questions" : page.content,
-        "isTag" : True,
+        "isHot" : True,
         "tagName" : tag_name
     }
     return render(request, 'index.html', context=context)

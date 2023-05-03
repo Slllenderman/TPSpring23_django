@@ -10,11 +10,15 @@
         {% endfor %}
     </div>
     <div class="d-inline-flex fw-light ">
-        Ответ дан {{date}}
+        {% if isQuestion %} 
+            Вопрос задан {{object.creation_date}}
+        {% else %}
+            Ответ дан {{object.creation_date}}
+        {% endif %}
         <div class="d-flex link-underline text-primary link-underline-opacity-0 ms-1" href="#">
             <img class="ms-sm-2 me-1" src="{% static 'img/default_avatar.jpg' %}" 
             width="25rem" height="25rem" style="border-radius: 0.3rem;"/>
-            {{nickname}}
+            {{object.author.nickname}}
         </div>
     </div>
     <div class="d-inline-flex {% if hideLikes %} d-sm-none {% endif %} align-items-center">
@@ -37,7 +41,7 @@
             </svg>
         </div>
         <div class="me-2" style="margin-top: 0.1rem;">
-            {{rating | convert_rating}}
+            {{object.rating | convert_rating}}
         </div>
         <div width="20rem" height="20rem">
             <svg width="6.3499999mm" height="6.3499999mm" viewBox="0 0 6.3499999 6.3499999" role="button" aria-hidden="true">

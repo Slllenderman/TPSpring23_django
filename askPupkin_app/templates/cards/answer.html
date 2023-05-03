@@ -7,7 +7,7 @@
         <p class="card-text fs-5 mb-0">
             {{answer.content}}
         </p>
-        {% include 'cards\cardinfo.html' with date=answer.creation_date nickname=answer.author.nickname rating=answer.rating only %}
+        {% include 'cards\cardinfo.html' with object=answer only %}
         {% if answer.correctness %}
             <div class="d-none d-sm-block">
                 <button type="button" class="btn btn-warning mt-2">Отменить решение</button>

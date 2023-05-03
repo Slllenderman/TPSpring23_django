@@ -42,7 +42,7 @@
             <div class="row">
                 <div class="col-1"></div>
                 <div class="col-sm-11">
-                    {% include 'cards\cardinfo.html' with date=question.creation_date nickname=question.author.nickname rating=question.rating tags=question.tags.all hideLikes=True only %}
+                    {% include 'cards\cardinfo.html' with object=question tags=question.tags.all hideLikes=True isQuestion=True only %}
                 </div>
             </div>
         </div>

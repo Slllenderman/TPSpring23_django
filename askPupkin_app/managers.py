@@ -29,7 +29,6 @@ class QuestionsManager(models.Manager):
     def get_page(self, request, order_by_rating=False, tag=None):
         page_num = get_params(request)
         questions = super().all()
-        page = get_page(questions, page_num)
         if tag:
             questions = questions.filter(tags__name=tag)
         if order_by_rating:
@@ -39,4 +38,5 @@ class QuestionsManager(models.Manager):
 class AnswersManager(models.Manager):
     def get_page(self, request, question_id):
         page_num = get_params(request)
-        return get_page(super().filter(question__pk=question_id), page_num)
+        answers = super().filter(question__pk=question_id).order_by("-correctness")
+        return get_page(answers, page_num)
