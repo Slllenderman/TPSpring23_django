@@ -1,4 +1,7 @@
 {% load static %}
+{% load filters %}
+{% load query_modifiers %}
+
 <div class="{% if isTag %}mt-4{% endif %}">
     <div class="d-inline-flex mt-sm-4 mt-2 mt-lg-0">
         <form class="d-flex" role="search">
@@ -9,8 +12,8 @@
                     <img src="{% static 'img/filter.svg' %}" alt="" width="25rem" height="25rem" />
                 </a>
                 <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="{% url 'index' %}">Сначала новые</a></li>
-                    <li><a class="dropdown-item" href="{% url 'hot' %}">Сначала популярные</a></li>
+                    <li><a class="dropdown-item" href="{{path|del_orderby:"rating"}}">Сначала новые</a></li>
+                    <li><a class="dropdown-item" href="{{path|add_orderby:"rating"}}">Сначала популярные</a></li>
                 </ul>
             </div>
             <button class="btn btn-outline-success mx-2" type="submit">
@@ -21,18 +24,18 @@
             <button type="button" class="btn btn-success ms-1">Задать вопрос</button>
         </div>
     </div>
-    {% if tagName %}
         <div class="d-block">
-            <div class="badge bg-secondary mt-1 d-inline-flex" height="1.5rem">
-                <div style="margin-top: 0.1rem; font-size: 0.9rem;">
-                    {{tagName}}
+            {% for tag in tags %}
+                <div class="badge bg-secondary mt-1 d-inline-flex" height="1.5rem">
+                    <div style="margin-top: 0.1rem; font-size: 0.9rem;">
+                        {{tag}}
+                    </div>
+                    <div data-bs-theme="dark">
+                        <a href="{{path|del_tag:tag}}" type="button" class="btn-close ms-1 dark" aria-label="Close"></a>
+                    </div>
                 </div>
-                <div data-bs-theme="dark">
-                    <a href="/" type="button" class="btn-close ms-1 dark" aria-label="Close"></a>
-                </div>
-            </div>
+            {% endfor %}
         </div>
-    {% endif %}
     <div class="d-sm-none mt-1 mb-2">
         <button type="button" class="btn btn-success mb-2">Задать вопрос</button>
     </div>

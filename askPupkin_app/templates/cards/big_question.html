@@ -1,32 +1,7 @@
-{% load static %}
-{% load filters %}
-<div class="{% if isTitle is not True %}card mb-4 me-sm-5{% endif %}">
-    <div class="card-body me-sm-3">
-        <div class="row">
-            <div>
-                {% if isTitle %}
-                    <div class="fs-2 fw-bold">
-                        {{question.title}}
-                    </div>
-                {% else %}
-                    <a role="button" class="lh-sm fs-3 fw-semibold link-underline link-underline-opacity-0"
-                    href="{% url 'question' question.pk %}">
-                        {{question.title}}
-                    </a>
-                {% endif %}
-                {% if isTitle %}
-                    <div class="fs-4">
-                        {{question.content}}
-                    </div>
-                {% else %}
-                    <div class="fs-5">
-                        {{question.description}}
-                    </div>
-                {% endif %}
-            </div>
-            <div class="row">
-                {% include 'cards\cardinfo.html' with object=question tags=question.tags.all hideLikes=False isQuestion=True only %}
-            </div>
-        </div>
+{% extends 'cards/question_base.html' %}
+
+{% block cardinfo %}
+    <div class="row">
+        {% include 'cards/cardinfo.html' with object=question tags=question.tags.all hideLikes=False isQuestion=True %}
     </div>
-</div>
+{% endblock %}

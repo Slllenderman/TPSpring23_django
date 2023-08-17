@@ -1,26 +1,25 @@
-{% load static %}
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
     <div class="me-5 mb-5">
-        <div class="fs-2 fw-bold">Настройки пользователя</div>
+        <div class="fs-1 fw-bold">Настройки пользователя</div>
         <form class="needs-validation" novalidate>
             <div class="mt-4">
-                <label for="mail" class="form-label fs-5">Email</label>
-                <input type="email" class="form-control" id="mail" style="max-width: 25rem;" />
+                <label for="mail" class="form-label fs-4">Email</label>
+                <input type="email" class="form-control fs-4" id="mail" style="max-width: 35rem;" />
             </div>
             <div class="mt-4">
-                <label for="username" class="form-label fs-5">Имя пользователя</label>
-                <input type="text" class="form-control" id="username" style="max-width: 25rem;" />
+                <label for="username" class="form-label fs-4">Имя пользователя</label>
+                <input type="text" class="form-control fs-4" id="username" style="max-width: 35rem;" />
             </div>
             <div class="mt-4 d-flex flex-column">
-                <label for="formFile" class="form-label fs-5">Выберите аватар пользователя</label>
+                <label for="formFile" class="form-label fs-4">Выберите аватар пользователя</label>
                 <img src="{% static 'img/default_avatar.jpg' %}" alt="" width="100rem" height="100rem" 
                 class="mt-2" style="border-radius: 1rem;"/>
                 <input class="form-control mt-2" type="file" id="formFile" style="max-width: 25rem;">
-                <div class="invalid-feedback">Ошибка регистрации. Пользователь с таким email уже существует</div>
             </div>
-            <button type="submit" class="btn btn-primary mt-3">
+            <button type="submit" class="btn btn-primary mt-3 fs-5">
                 Сохранить
             </button>
         </form>

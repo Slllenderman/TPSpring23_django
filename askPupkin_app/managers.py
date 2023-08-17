@@ -5,6 +5,7 @@ from django.core.paginator import Paginator
 
 DEFAULT_PAGE = 1
 PAGINATION_STEP = 10
+ORDERS = ("rating", )
 
 def get_page(queryset, page_num, step=PAGINATION_STEP):
     paginator = Paginator(queryset, step)
@@ -17,26 +18,25 @@ def get_page(queryset, page_num, step=PAGINATION_STEP):
         first = DEFAULT_PAGE
     )
     return page
-
-def get_params(request):
-    try:
-        page = int( request.GET.get("page", str(DEFAULT_PAGE)) )
-        return page
-    except:
-        return DEFAULT_PAGE
     
 class QuestionsManager(models.Manager):
-    def get_page(self, request, order_by_rating=False, tag=None):
-        page_num = get_params(request)
+    def get_page(self, request):
+        page_num = int( request.GET.get("page", DEFAULT_PAGE) )
+        tags = request.GET.getlist("tag")
+        order_by = request.GET.get("order_by", "")
         questions = super().all()
-        if tag:
+
+        for tag in tags:
             questions = questions.filter(tags__name=tag)
-        if order_by_rating:
-            questions = questions.order_by("-rating")
-        return get_page(questions, page_num)
+        
+        if order_by in ORDERS:
+            questions = questions.order_by("-" + order_by)
+        
+        return get_page(questions, page_num), tags, True if order_by == "rating" else False
+
     
 class AnswersManager(models.Manager):
     def get_page(self, request, question_id):
-        page_num = get_params(request)
+        page_num = request.GET.get("page", DEFAULT_PAGE)
         answers = super().filter(question__pk=question_id).order_by("-correctness")
         return get_page(answers, page_num)

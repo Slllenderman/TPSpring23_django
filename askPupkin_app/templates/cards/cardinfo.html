@@ -1,9 +1,11 @@
-{% load filters %}
 {% load static %}
+{% load filters %}
+{% load query_modifiers %}
+
 <div class="d-flex flex-column mb-2">
     <div class="d-inline-flex mb-2">
         {% for tag in tags %}
-            <a role="button" style="font-size: 1rem;" href="{% url 'tag' tag.name %}"
+            <a role="button" style="font-size: 1rem;" href="{{path|add_tag:tag.name}}"
             class="badge bg-secondary align-self-end me-1 link-underline link-underline-opacity-0">
                 {{tag.name}}
             </a>
