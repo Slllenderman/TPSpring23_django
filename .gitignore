@@ -1,2 +1,4 @@
 bootstrap*
 .prettierc
+__pycache__
+.vscode
