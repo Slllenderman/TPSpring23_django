@@ -2,3 +2,5 @@ bootstrap*
 .prettierc
 __pycache__
 .vscode
+migrations*
+__init__
