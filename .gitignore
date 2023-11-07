@@ -1,3 +1,4 @@
+env*
 bootstrap*
 .prettierc
 __pycache__
