@@ -1,5 +1,6 @@
 import os
 import sys
+import subprocess
 
 MANAGEMENT_DIR = "./askPupkin_managements/"
 
@@ -17,15 +18,29 @@ def activate_env():
     elif os.path.exists(ACTIVATE_ENV_UNIX):
         exec(open(ACTIVATE_ENV_UNIX).read(), {'__file__': ACTIVATE_ENV_UNIX})
     else:
-        raise Exception("The virtual environment activation file does not exist")
+        raise FileNotFoundError("The virtual environment activation file does not exist")
     
 def check_env_exists():
     if not os.path.exists(ENV):
+        try: import pip
+        except: raise EnvironmentError("PIP package is not installed")
+
+        try: import virtualenv
+        except: 
+            pip.main(["install", "virtualenv"])
+            import virtualenv
+
         if not os.path.exists(REQUIREMENTS):
-            raise Exception("The requirements file is not exist")
-        os.system(f"python -m virtualenv {ENV}")
+            raise FileNotFoundError("The requirements file is not exist")
+        
+        virtualenv.cli_run([ENV])
         activate_env()
-        os.system(f"pip install -r {REQUIREMENTS}")
+
+        try:
+            subprocess.run(["pip", "install", "-r", "./askPupkin_managements/req.txt"], check=True)
+        except Exception as e:
+            os.system(f"rm -r {ENV}")
+            raise EnvironmentError("Installation error: ", e.args)
 
 def check_env_active():
     if sys.prefix == sys.base_prefix:
