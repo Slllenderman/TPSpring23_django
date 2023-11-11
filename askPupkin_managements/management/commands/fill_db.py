@@ -3,6 +3,7 @@ from django.contrib.contenttypes.models import ContentType
 from askPupkin_models.models import User, Profile, Tag, Question, Answer, Like
 import random
 from nickname_generator import generate
+from progress.bar import Bar
 
 lorem_samples = [
     #lorem5
@@ -118,7 +119,9 @@ class Command(BaseCommand):
         answers = list()
         profiles = list()
         questions = list()
+        bar = Bar('Progress:', max = ratio)
         for i in range(ratio):
+            bar.next()
             user = self.generate_user()
             profile = self.generate_profile(user)
             profiles.append(profile)

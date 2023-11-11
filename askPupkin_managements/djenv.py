@@ -27,7 +27,7 @@ def check_env_exists():
         except: raise EnvironmentError("PIP package is not installed")
 
         try: import virtualenv
-        except: 
+        except:
             pip.main(["install", "virtualenv"])
             import virtualenv
 

@@ -12,5 +12,5 @@ class Command(BaseCommand):
             cursor.execute("create database askpupkin_db;")
         os.system("manage.py makemigrations askPupkin_models")
         os.system("manage.py migrate")
-        os.system("manage.py fill_db 2")
+        os.system("manage.py fill_db 3")
         
