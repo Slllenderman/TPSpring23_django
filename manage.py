@@ -10,7 +10,7 @@ def main():
 
     env.check_env_exists()
     env.check_env_active()
-    #env.update_requirements()
+    env.update_requirements()
     
     try:
         from django.core.management import execute_from_command_line
