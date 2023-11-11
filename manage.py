@@ -2,11 +2,16 @@
 """Django's command-line utility for administrative tasks."""
 import os
 import sys
-
+import askPupkin_managements.djenv as env
 
 def main():
     """Run administrative tasks."""
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'askPupkin.settings')
+
+    env.check_env_exists()
+    env.check_env_active()
+    env.update_requirements()
+    
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:
