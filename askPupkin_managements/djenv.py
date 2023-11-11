@@ -39,7 +39,7 @@ def check_env_exists():
         try:
             subprocess.run(["pip", "install", "-r", "./askPupkin_managements/req.txt"], check=True)
         except Exception as e:
-            os.system(f"rm -r {ENV}")
+            os.remove(ENV)
             raise EnvironmentError("Installation error: ", e.args)
 
 def check_env_active():
