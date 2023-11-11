@@ -17,7 +17,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'askPupkin_app'
+    'askPupkin_managements',
+    'askPupkin_models',
+    'askPupkin_views'
 ]
 
 MIDDLEWARE = [
@@ -30,7 +32,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'askPupkin_proj.urls'
+ROOT_URLCONF = 'askPupkin.urls'
 
 TEMPLATES = [
     {
@@ -48,7 +50,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'askPupkin_proj.wsgi.application'
+WSGI_APPLICATION = 'askPupkin.wsgi.application'
 
 DATABASES = {
     'default': {

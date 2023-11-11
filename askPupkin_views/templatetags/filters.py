@@ -1,6 +1,6 @@
 from django import template
 from django.contrib.contenttypes.models import ContentType
-from ..models import *
+from askPupkin_models.models import *
 register = template.Library()
 
 @register.filter

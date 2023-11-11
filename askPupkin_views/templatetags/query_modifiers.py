@@ -1,6 +1,6 @@
 from django import template
 from django.contrib.contenttypes.models import ContentType
-from ..models import *
+from askPupkin_models.models import *
 
 def add_param(path, parameter, key):
     if "?" not in path:

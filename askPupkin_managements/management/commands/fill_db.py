@@ -1,6 +1,6 @@
 from django.core.management.base import BaseCommand
 from django.contrib.contenttypes.models import ContentType
-from ...models import User, Profile, Tag, Question, Answer, Like
+from askPupkin_models.models import User, Profile, Tag, Question, Answer, Like
 import random
 from nickname_generator import generate
 
@@ -31,8 +31,8 @@ mail_samples = [
 ]
 
 tag_samples = [
-    'c#',
-    'c++',
+    'csh',
+    'cpp',
     'python',
     'ruby',
     'go',

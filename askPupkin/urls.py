@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.urls import path, include
-from askPupkin_app import views
+from askPupkin_views import views
 
 urlpatterns = [
     path('', views.index, name='index'),

@@ -1,6 +1,6 @@
 from django.shortcuts import render
-from .models import *
-from .accessors import *
+from askPupkin_models.models import *
+from askPupkin_models.accessors import *
 
 def index(request):
     page, tags, is_hot = Question.objects.get_page(request)
