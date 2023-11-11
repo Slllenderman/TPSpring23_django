@@ -1,8 +1,10 @@
 from django.db import models
+from django.core import exceptions, validators
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.fields import GenericForeignKey, GenericRelation
 from django.contrib.contenttypes.models import ContentType
 from .managers import *
+import re
 
 class Profile(models.Model):
     nickname = models.CharField(max_length=15)
@@ -12,7 +14,13 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     
 class Tag(models.Model):
-    name = models.CharField(max_length=10)
+    name = models.CharField(max_length=10, unique=True, validators=[
+        validators.RegexValidator(
+            "[a-z]{2,7}",
+            "Tag is not a correct!"
+        )
+    ])
+
 
 class Like(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)

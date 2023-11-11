@@ -1,6 +1,7 @@
 import os
 import sys
 import subprocess
+import shutil
 
 MANAGEMENT_DIR = "./askPupkin_managements/"
 
@@ -39,7 +40,7 @@ def check_env_exists():
         try:
             subprocess.run(["pip", "install", "-r", REQUIREMENTS], check=True)
         except Exception as e:
-            os.remove(ENV)
+            shutil.rmtree(ENV)
             raise EnvironmentError("Installation error: ", e.args)
 
 def check_env_active():
