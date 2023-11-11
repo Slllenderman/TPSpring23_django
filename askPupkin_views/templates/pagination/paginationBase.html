@@ -1,40 +1,42 @@
+{% load query_modifiers %}
+
 <div class="d-inline-flex">
     <li class="page-item">
         <a class="page-link fs-5 {% if pagination.disablePrev %}disabled{% endif %}" 
-        aria-label="Previous" href="./?page={{pagination.prev}}">
+        aria-label="Previous" href="{{path|add_page:pagination.prev}}">
             <span aria-hidden="true">&laquo;</span>
         </a>
     </li>
     {% if pagination.isMoreThanHalf %}
         <li class="page-item">
-            <a class="page-link fs-5" href="./?page={{pagination.first}}">{{pagination.first}}</a>
+            <a class="page-link fs-5" href=".{{path|add_page:pagination.first}}">{{pagination.first}}</a>
         </li>
         <li class="page-item disabled"><a class="page-link fs-5" href="#">...</a></li>
         {% if pagination.shortPagination is False %}
             <li class="page-item">
-                <a class="page-link fs-5" href="./?page={{pagination.prev}}">{{pagination.prev}}</a>
+                <a class="page-link fs-5" href="{{path|add_page:pagination.prev}}">{{pagination.prev}}</a>
             </li>
         {% endif %}
         <li class="page-item">
-            <a class="page-link fs-5" href="./?page={{pagination.current}}#">{{pagination.current}}</a>
+            <a class="page-link fs-5" href="{{path|add_page:pagination.current}}#">{{pagination.current}}</a>
         </li>
     {% else %}
         <li class="page-item">
-            <a class="page-link fs-5" href="./?page={{pagination.current}}#">{{pagination.current}}</a>
+            <a class="page-link fs-5" href="{{path|add_page:pagination.current}}#">{{pagination.current}}</a>
         </li>
         {% if pagination.shortPagination is False %}
             <li class="page-item">
-                <a class="page-link fs-5" href="./?page={{pagination.next}}">{{pagination.next}}</a>
+                <a class="page-link fs-5" href="{{path|add_page:pagination.next}}">{{pagination.next}}</a>
             </li>
         {% endif %}
         <li class="page-item disabled"><a class="page-link fs-5" href="#">...</a></li>
         <li class="page-item">
-            <a class="page-link fs-5" href="./?page={{pagination.last}}">{{pagination.last}}</a>
+            <a class="page-link fs-5" href="{{path|add_page:pagination.last}}">{{pagination.last}}</a>
         </li>   
     {% endif %}
     <li class="page-item">
         <a class="page-link fs-5 {% if pagination.disableNext %}disabled{% endif %}" 
-        href="./?page={{pagination.next}}" aria-label="Next">
+        href="{{path|add_page:pagination.next}}" aria-label="Next">
             <span aria-hidden="true">&raquo;</span>
         </a>
     </li>

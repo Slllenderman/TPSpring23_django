@@ -12,8 +12,8 @@ class PaginationAccessor:
         self.disableNext = page.current == page.last
         self.disablePrev = page.first == page.current
         self.isMoreThanHalf = page.current > (page.last / 2)
-        self.next = page.current + 1
-        self.prev = page.current - 1
-        self.first = page.first
-        self.last = page.last
-        self.current = page.current
+        self.next = str(page.current + 1)
+        self.prev = str(page.current - 1)
+        self.first = str(page.first)
+        self.last = str(page.last)
+        self.current = str(page.current)

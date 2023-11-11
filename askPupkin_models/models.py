@@ -1,10 +1,9 @@
 from django.db import models
-from django.core import exceptions, validators
+from django.core import validators
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.fields import GenericForeignKey, GenericRelation
 from django.contrib.contenttypes.models import ContentType
 from .managers import *
-import re
 
 class Profile(models.Model):
     nickname = models.CharField(max_length=15)
@@ -13,10 +12,11 @@ class Profile(models.Model):
     rating = models.IntegerField(default=0)
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     
+
 class Tag(models.Model):
     name = models.CharField(max_length=10, unique=True, validators=[
         validators.RegexValidator(
-            "[a-z]{2,7}",
+            "[a-z]{2,10}",
             "Tag is not a correct!"
         )
     ])
@@ -30,6 +30,7 @@ class Like(models.Model):
     class Meta:
         unique_together = ('user', 'content_type', 'object_id',)
 
+
 class Question(models.Model):
     objects = QuestionsManager()
     title = models.CharField(max_length=150)
@@ -42,7 +43,8 @@ class Question(models.Model):
     likes = GenericRelation(Like)
     class Meta:
         ordering = ['-creation_date']
-    
+
+
 class Answer(models.Model):
     objects = AnswersManager()
     content = models.TextField()

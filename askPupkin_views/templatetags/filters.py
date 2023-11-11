@@ -24,9 +24,9 @@ def choice_format(question, isCard):
     if isCard:
         symb_summary = len(question.title) * title_weight + len(question.description) * content_weight
         if symb_summary < SMALL_BREACKPOINT:
-            return 'cards/small_question.html'
+            return 'cards/question/small_question.html'
     else:
         symb_summary = len(question.title) * title_weight + len(question.content) * content_weight
         if symb_summary > BIG_BREACKPOINT:
-            return 'cards/big_question.html'
-    return 'cards/question.html'
+            return 'cards/question/big_question.html'
+    return 'cards/question/question.html'
