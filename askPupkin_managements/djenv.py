@@ -46,6 +46,3 @@ def check_env_exists():
 def check_env_active():
     if sys.prefix == sys.base_prefix:
         activate_env()
-
-def update_requirements():
-    os.system(f"pip freeze > {REQUIREMENTS}")
