@@ -37,7 +37,7 @@ def check_env_exists():
         activate_env()
 
         try:
-            subprocess.run(["pip", "install", "-r", "./askPupkin_managements/req.txt"], check=True)
+            subprocess.run(["pip", "install", "-r", REQUIREMENTS], check=True)
         except Exception as e:
             os.remove(ENV)
             raise EnvironmentError("Installation error: ", e.args)
