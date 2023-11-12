@@ -71,9 +71,7 @@ class Command(BaseCommand):
     def generate_tags(self):
         tags = list()
         for tag in tag_samples:
-            new_tag = Tag()
-            new_tag.name = tag
-            new_tag.save()
+            new_tag, _ = Tag.objects.get_or_create(name=tag)
             tags.append(new_tag)
         return tags
 

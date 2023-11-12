@@ -5,6 +5,7 @@ from django.contrib.contenttypes.fields import GenericForeignKey, GenericRelatio
 from django.contrib.contenttypes.models import ContentType
 from .managers import *
 
+
 class Profile(models.Model):
     nickname = models.CharField(max_length=15)
     avatar = models.ImageField(upload_to='./static/avs', blank=True)
