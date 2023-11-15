@@ -1,30 +1,13 @@
 from django.shortcuts import render
-from askPupkin_models.models import *
-from askPupkin_models.accessors import *
+from askPupkin_views.accessors import *
 
 def index(request):
-    page, tags, is_hot = Question.objects.get_page(request)
-    path = request.get_full_path()
-    pagination = PaginationAccessor(page)
-    context = {
-        "questions" : page.content,
-        "pagination" : pagination,
-        "isHot" : is_hot,
-        "tags" : tags,
-        "path" : path
-    }
+    context = { 'context' : QuestionsAccessors(request) }
     return render(request, 'index.html', context=context)
 
-def question(request, question_id):
-    question = Question.objects.get(pk=question_id)
-    page = Answer.objects.get_page(request, question_id)
-    pagination = PaginationAccessor(page)
-    context = {
-        "pagination" : pagination,
-        "question" : question,
-        "answers" : page.content
-    }
-    return render(request, 'question.html', context=context)
+def question_page(request, question_id):
+    context = { 'context' : AnswersAccessor(request, question_id) }
+    return render(request, 'questions_page.html', context=context)
 
 def ask(request):
     return render(request, 'ask.html')
