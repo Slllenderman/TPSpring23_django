@@ -3,7 +3,7 @@ from django.db import models
 from askPupkin_models.pagination import paginate, DEFAULT_PAGE
 
 ORDERS = ("rating", )
-    
+
 class QuestionsQueryset(models.QuerySet):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
