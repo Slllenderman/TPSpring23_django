@@ -22,10 +22,9 @@ class QuestionsAccessors:
         self.pagination = PaginationAccessor(page)
 
 class AnswersAccessor:
-    def __init__(self, request, question_id):
-        self.question = Question.objects.get(pk=question_id)
-        self.page = Answer.objects.get_page(request, question_id)
-        self.answers = self.page.content
-        self.pagination = PaginationAccessor(self.page)
+    def __init__(self, page, question):
+        self.question = question
+        self.answers = page.content
+        self.pagination = PaginationAccessor(page)
 
     

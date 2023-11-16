@@ -8,7 +8,9 @@ def index(request):
     return render(request, 'index.html', context=context)
 
 def question_page(request, question_id):
-    context = { 'context' : AnswersAccessor(request, question_id) }
+    question = Question.objects.get(pk=question_id)
+    page = Answer.objects.get_page(request, question_id)
+    context = { 'context' : AnswersAccessor(page, question) }
     return render(request, 'question_page.html', context=context)
 
 def ask(request):

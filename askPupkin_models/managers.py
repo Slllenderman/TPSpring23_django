@@ -20,6 +20,7 @@ class QuestionsQueryset(models.QuerySet):
         ordered = super().order_by(*args, **kwargs)
         ordered.tags = self.tags
         ordered.order_by_paramval = self.order_by_paramval
+        return ordered
 
     def get_page(self, request):
         try: page_num = int(request.GET.get("page", DEFAULT_PAGE) )
@@ -46,6 +47,9 @@ class QuestionsQueryset(models.QuerySet):
 
 class AnswersManager(models.Manager):
     def get_page(self, request, question_id):
-        page_num = request.GET.get("page", DEFAULT_PAGE)
+        try: page_num = int(request.GET.get("page", DEFAULT_PAGE) )
+        except ValueError: page_num = DEFAULT_PAGE
         answers = super().filter(question__pk=question_id).order_by("-correctness")
-        return paginate(answers, page_num)
+        page = paginate(answers, page_num)
+        page.path = request.get_full_path()
+        return page
