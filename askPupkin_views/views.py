@@ -1,29 +1,17 @@
 from django.shortcuts import render
-from askPupkin_models.models import *
-from askPupkin_models.accessors import *
+from askPupkin_views.accessors import *
 
 def index(request):
-    page, tags, is_hot = Question.objects.get_page(request)
-    pagination = PaginationAccessor(page)
-    context = {
-        "questions" : page.content,
-        "pagination" : pagination,
-        "isHot" : is_hot,
-        "tags" : tags,
-        "path" : request.get_full_path()
-    }
+    questions = Question.objects.filter_tags(request).order_by_param(request)
+    page = questions.get_page(request)
+    context = { 'context' : QuestionsAccessors(page, questions) }
     return render(request, 'index.html', context=context)
 
-def question(request, question_id):
+def question_page(request, question_id):
     question = Question.objects.get(pk=question_id)
     page = Answer.objects.get_page(request, question_id)
-    pagination = PaginationAccessor(page)
-    context = {
-        "pagination" : pagination,
-        "question" : question,
-        "answers" : page.content
-    }
-    return render(request, 'question.html', context=context)
+    context = { 'context' : AnswersAccessor(page, question) }
+    return render(request, 'question_page.html', context=context)
 
 def ask(request):
     return render(request, 'ask.html')
@@ -34,6 +22,4 @@ def settings(request, user_id):
 def registration(request):
     return render(request, 'registration/registration.html')
 
-def err_handler404(request, *args, **argv):
-    return render(request, 'err_handler404.html')
 
