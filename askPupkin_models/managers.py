@@ -7,9 +7,19 @@ ORDERS = ("rating", )
 class QuestionsQueryset(models.QuerySet):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        self.order_by_paramval = ""
+        self.tags = list()
 
-    order_by_paramval = ""
-    tags = list()
+    def filter(self, *args, **kwargs):
+        filtered = super().filter(*args, **kwargs)
+        filtered.order_by_paramval = self.order_by_paramval
+        filtered.tags = self.tags
+        return filtered
+
+    def order_by(self, *args, **kwargs):
+        ordered = super().order_by(*args, **kwargs)
+        ordered.tags = self.tags
+        ordered.order_by_paramval = self.order_by_paramval
 
     def get_page(self, request):
         try: page_num = int(request.GET.get("page", DEFAULT_PAGE) )
@@ -19,20 +29,21 @@ class QuestionsQueryset(models.QuerySet):
         return page
     
     def filter_tags(self, request):
-        QuestionsQueryset.tags = request.GET.getlist("tag")
-        return self.filter(tags__name__in=QuestionsQueryset.tags) if QuestionsQueryset.tags else self
+        self.tags = request.GET.getlist("tag")
+        for tag in self.tags:
+            self = self.filter(tags__name=tag)
+        return self
     
     def order_by_param(self, request):
-        QuestionsQueryset.order_by_paramval = request.GET.get("order_by", "")
-        if QuestionsQueryset.order_by_paramval in ORDERS:
-            return self.order_by("-" + QuestionsQueryset.order_by_paramval)
+        self.order_by_paramval = request.GET.get("order_by", "")
+        if self.order_by_paramval in ORDERS:
+            return self.order_by("-" + self.order_by_paramval)
         else:
-            QuestionsQueryset.order_by_paramval = ""
+            self.order_by_paramval = ""
             return self
             
         
 
-    
 class AnswersManager(models.Manager):
     def get_page(self, request, question_id):
         page_num = request.GET.get("page", DEFAULT_PAGE)
