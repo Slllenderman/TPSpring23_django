@@ -2,7 +2,7 @@
 {% load filters %}
 
 {% block content %}
-	{% if isHot %}
+	{% if context.is_hot %}
 		<h1 class="mt-3 mb-4">Популярные вопросы</h1>
 	{% else %}
 		<h1 class="mt-3 mb-4">Новые вопросы</h1>

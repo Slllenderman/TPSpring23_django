@@ -4,31 +4,32 @@ from askPupkin_models.pagination import paginate, DEFAULT_PAGE
 
 ORDERS = ("rating", )
     
-class QuestionsManager(models.Manager):
-    def get_page(self, request, queryset = None):
-        if not queryset:
-            queryset = super().all()
-        page_num = int(request.GET.get("page", DEFAULT_PAGE) )
-        page = paginate(queryset, page_num)
+class QuestionsQueryset(models.QuerySet):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+    order_by_paramval = ""
+    tags = list()
+
+    def get_page(self, request):
+        try: page_num = int(request.GET.get("page", DEFAULT_PAGE) )
+        except ValueError: page_num = DEFAULT_PAGE
+        page = paginate(self, page_num)
+        page.path = request.get_full_path()
         return page
     
-    def filter_tags(self, request, queryset = None):
-        if not queryset:
-            queryset = super().all()
-        tags = request.GET.getlist("tag")
-        for tag in tags:
-            queryset = queryset.filter(tags__name=tag)
-        return queryset, tags
+    def filter_tags(self, request):
+        QuestionsQueryset.tags = request.GET.getlist("tag")
+        return self.filter(tags__name__in=QuestionsQueryset.tags) if QuestionsQueryset.tags else self
     
-    def order_by_params(self, request, queryset = None):
-        if not queryset:
-            queryset = super().all()
-        order_by = request.GET.get("order_by", "")
-        if order_by in ORDERS:
-            queryset = queryset.order_by("-" + order_by)
+    def order_by_param(self, request):
+        QuestionsQueryset.order_by_paramval = request.GET.get("order_by", "")
+        if QuestionsQueryset.order_by_paramval in ORDERS:
+            return self.order_by("-" + QuestionsQueryset.order_by_paramval)
         else:
-            order_by = ""
-        return queryset, order_by
+            QuestionsQueryset.order_by_paramval = ""
+            return self
+            
         
 
     

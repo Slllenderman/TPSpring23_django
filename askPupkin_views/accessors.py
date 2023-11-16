@@ -14,15 +14,12 @@ class PaginationAccessor:
         self.current = str(page.current)
 
 class QuestionsAccessors:
-    def __init__(self, request):
-        questions, tags = Question.objects.filter_tags(request)
-        questions, order_by = Question.objects.order_by_params(request, questions)
-        page = Question.objects.get_page(request, questions)
-        self.is_hot = True if order_by == "rating" else False
-        self.tags = tags
-        self.path = request.get_full_path()
-        self.pagination = PaginationAccessor(page)
+    def __init__(self, page, questions):
+        self.is_hot = True if questions.order_by_paramval == "rating" else False
+        self.tags = questions.tags
         self.questions = page.content
+        self.path = page.path
+        self.pagination = PaginationAccessor(page)
 
 class AnswersAccessor:
     def __init__(self, request, question_id):

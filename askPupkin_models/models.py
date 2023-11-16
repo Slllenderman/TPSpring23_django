@@ -33,7 +33,7 @@ class Like(models.Model):
 
 
 class Question(models.Model):
-    objects = QuestionsManager()
+    objects = QuestionsQueryset().as_manager()
     title = models.CharField(max_length=150)
     description = models.CharField(max_length=300)
     content = models.TextField()
