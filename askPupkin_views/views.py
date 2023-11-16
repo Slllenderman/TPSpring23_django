@@ -4,14 +4,13 @@ from askPupkin_models.accessors import *
 
 def index(request):
     page, tags, is_hot = Question.objects.get_page(request)
-    path = request.get_full_path()
     pagination = PaginationAccessor(page)
     context = {
         "questions" : page.content,
         "pagination" : pagination,
         "isHot" : is_hot,
         "tags" : tags,
-        "path" : path
+        "path" : request.get_full_path()
     }
     return render(request, 'index.html', context=context)
 

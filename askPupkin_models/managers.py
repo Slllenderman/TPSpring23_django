@@ -21,7 +21,8 @@ def get_page(queryset, page_num, step=PAGINATION_STEP):
     
 class QuestionsManager(models.Manager):
     def get_page(self, request):
-        page_num = int( request.GET.get("page", DEFAULT_PAGE) )
+        try: page_num = int( request.GET.get("page", DEFAULT_PAGE) )
+        except ValueError: page_num = DEFAULT_PAGE
         tags = request.GET.getlist("tag")
         order_by = request.GET.get("order_by", "")
         questions = super().all()
