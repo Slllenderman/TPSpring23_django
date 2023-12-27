@@ -7,8 +7,7 @@ from .managers import *
 
 
 class Profile(models.Model):
-    nickname = models.CharField(max_length=15)
-    avatar = models.ImageField(upload_to='./static/avs', blank=True)
+    avatar = models.ImageField(upload_to='./static/img/avatars', default='./static/img/defaul_avatar.png')
     reg_date = models.DateField(auto_now_add=True)
     rating = models.IntegerField(default=0)
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
@@ -37,7 +36,7 @@ class Question(models.Model):
     title = models.CharField(max_length=150)
     description = models.CharField(max_length=300)
     content = models.TextField()
-    creation_date = models.DateField(auto_now_add=True)
+    creation_date = models.DateTimeField(auto_now_add=True)
     rating = models.IntegerField(default=0)
     author = models.ForeignKey(Profile, on_delete=models.CASCADE)
     tags = models.ManyToManyField(Tag)

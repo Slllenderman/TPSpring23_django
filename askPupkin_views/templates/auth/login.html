@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+	<div class="me-5 mb-5">
+		<div class="fs-1 fw-bold">Авторизация</div>
+		<form class="needs-validation" method="post" novalidate>
+			{% csrf_token %}
+			<div class="mt-4">
+				<label for="login" class="form-label fs-4">{{form.username.label}}</label>
+				{{form.username}}
+				{% if form.username.errors %}
+					<div class="invalid-feedback">{{form.login.errors}}</div>
+				{% else %}
+					<div class="invalid-feedback">Введите электронную почту аккаунта</div>
+				{% endif %}
+			</div>
+			<div class="mt-4">
+				<label for="password" class="form-label fs-4">{{form.password.label}}</label>
+				{{form.password}}
+				{% if form.password.errors %}
+					<div class="invalid-feedback">{{form.password.errors | first}}</div>
+				{% else %}
+					<div class="invalid-feedback">Введите пароль</div>
+				{% endif %}
+			</div>
+			<button type="submit" class="btn btn-primary mt-4 fs-4 px-4">
+				Войти
+			</button>
+		</form>
+	</div>
+{% endblock %}

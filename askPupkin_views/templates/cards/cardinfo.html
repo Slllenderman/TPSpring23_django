@@ -25,7 +25,7 @@
     </div>
     <div class="d-inline-flex {% if hideLikes %} d-sm-none {% endif %} align-items-center">
         <div class="me-2" width="20rem" height="20rem">
-            <svg width="23px" height="20px" role="button" aria-hidden="true">
+            <svg onclick="set_Like(0, 0)"  width="23px" height="20px" role="button" aria-hidden="true">
                 <g fill="none">
                     <g transform="translate(-679.000000, -507.000000)">
                         <g transform="translate(100.000000, 100.000000)">
@@ -46,7 +46,7 @@
             {{object.rating | convert_rating}}
         </div>
         <div width="20rem" height="20rem">
-            <svg width="6.3499999mm" height="6.3499999mm" viewBox="0 0 6.3499999 6.3499999" role="button" aria-hidden="true">
+            <svg onclick="set_Like(0, 0)" width="6.3499999mm" height="6.3499999mm" viewBox="0 0 6.3499999 6.3499999" role="button" aria-hidden="true">
                 <g>
                     <g transform="matrix(0.26458333,0,0,-0.26458333,0,6.3499999)"
                     style="fill:none;fill-rule:evenodd;stroke:none;stroke-width:1">

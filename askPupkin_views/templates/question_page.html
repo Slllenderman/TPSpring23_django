@@ -12,9 +12,11 @@
 					{% for answer in context.answers %}
 						{% include 'cards/answer.html' with answer=answer only %}
 					{% endfor %}
-					<form class="mt-3">
+					<form class="needs-validation mt-3" method="post" novalidate>
+						{% csrf_token %}
 						<label for="answerTextId" class="form-label fs-4">Ваш ответ</label>
-						<textarea class="form-control" id="answerTextId" rows="5"></textarea>
+						{{form.answer}}
+						<div class="invalid-feedback">Напишите ответ</div>
 						<button type="submit" class="btn btn-primary mt-2">Ответить</button>
 					</form>
 				</div>

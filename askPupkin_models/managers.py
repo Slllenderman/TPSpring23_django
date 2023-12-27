@@ -27,6 +27,7 @@ class QuestionsQueryset(models.QuerySet):
         except ValueError: page_num = DEFAULT_PAGE
         page = paginate(self, page_num)
         page.path = request.get_full_path()
+        page.user = request.user
         return page
     
     def filter_tags(self, request):
@@ -46,10 +47,14 @@ class QuestionsQueryset(models.QuerySet):
         
 
 class AnswersManager(models.Manager):
-    def get_page(self, request, question_id):
+    def get_page(self, request, question_id, new_answer=False):
         try: page_num = int(request.GET.get("page", DEFAULT_PAGE) )
         except ValueError: page_num = DEFAULT_PAGE
         answers = super().filter(question__pk=question_id).order_by("-correctness")
-        page = paginate(answers, page_num)
+        if new_answer:
+            page = paginate(answers, end=True)
+        else:
+            page = paginate(answers, page_num)
         page.path = request.get_full_path()
+        page.user = request.user
         return page

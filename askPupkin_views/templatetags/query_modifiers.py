@@ -46,6 +46,5 @@ def del_tag(path, parameter):
 
 @register.filter
 def add_page(path, parameter):
-    path = reset_path(path)
     path = re.sub("page=\d+", "", path)
     return add_param(path, parameter, "page").replace("&&", "&").replace("?&", "?")

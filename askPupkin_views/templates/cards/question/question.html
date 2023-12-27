@@ -3,14 +3,14 @@
 {% block rating %}
     <div class="col-1 d-none d-sm-flex flex-column text-center align-items-center">
         <svg role="button" aria-hidden="true" style="fill: darkgrey;" onmouseover="this.style.fill='grey';"
-            width="36" onmouseleave="this.style.fill='darkgrey';" onclick="this.style.fill='green';" height="36"
+            width="36" onmouseleave="this.style.fill='darkgrey';" onclick="this.style.fill='green; set_Like(0, 0)';" height="36"
             viewBox="0 0 36 36">
             <path d="M2 25h32L18 9 2 25Z"></path>
         </svg>
         <div class="fs-3">
             {{question.rating}}
         </div>
-        <svg role="button" aria-hidden="true" width="36" height="36" style="fill: darkgrey;"
+        <svg role="button" aria-hidden="true" width="36" height="36" style="fill: darkgrey; set_Like(0, 0)"
             onmouseover="this.style.fill='grey';" width="36" onmouseleave="this.style.fill='darkgrey';"
             onclick="this.style.fill='darkred';" viewBox="0 0 36 36">
             <path d="M2 11h32L18 27 2 11Z"></path>

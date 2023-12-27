@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="me-5 mb-5">
+        <div class="fs-1 fw-bold">Регистрация</div>
+        <form class="needs-validation" method="post" novalidate>
+            {% csrf_token %}
+            <div class="mt-4">
+                <label class="form-label fs-5">{{form.email.label}}</label>
+                {{form.email}}
+                {% if form.email.errors %}
+					<div class="invalid-feedback">{{form.email.errors | first}}</div>
+				{% else %}
+					<div class="invalid-feedback">Введите email</div>
+				{% endif %}
+            </div>
+            <div class="mt-4">
+                <label class="form-label fs-5">{{form.username.label}}</label>
+                {{form.username}}
+                {% if form.username.errors %}
+					<div class="invalid-feedback">{{form.username.errors | first}}</div>
+				{% else %}
+					<div class="invalid-feedback">Введите имя пользователя</div>
+				{% endif %}
+            </div>
+            <div class="mt-4">
+                <label class="form-label fs-5">{{form.password1.label}}</label>
+                {{form.password1}}
+                {% if form.password1.errors %}
+					<div class="invalid-feedback">{{form.password1.errors | first}}</div>
+				{% else %}
+					<div class="invalid-feedback">Введите пароль</div>
+				{% endif %}
+            </div>
+            <div class="mt-4">
+                <label class="form-label fs-5">{{form.password2.label}}</label>
+                {{form.password2}}
+                {% if form.password2.errors %}
+					<div class="invalid-feedback">{{form.password2.errors | first}}</div>
+				{% else %}
+					<div class="invalid-feedback">Повторите пароль</div>
+				{% endif %}
+            </div>
+            <div class="mt-4">
+                <label class="form-label fs-5">{{form.avatar.label}}</label>
+                {{form.avatar}}
+            </div>
+            <button type="submit" class="btn btn-primary mt-3 fs-4">
+                Регистрация
+            </button>
+        </form>
+    </div>
+{% endblock %}

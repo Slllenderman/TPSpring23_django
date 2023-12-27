@@ -19,12 +19,15 @@ class QuestionsAccessors:
         self.tags = questions.tags
         self.questions = page.content
         self.path = page.path
+        self.user = page.user
         self.pagination = PaginationAccessor(page)
 
 class AnswersAccessor:
     def __init__(self, page, question):
         self.question = question
         self.answers = page.content
+        self.path = page.path
+        self.user = page.user
         self.pagination = PaginationAccessor(page)
 
     

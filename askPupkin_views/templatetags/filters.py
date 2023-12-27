@@ -30,3 +30,11 @@ def choice_format(question, isCard):
         if symb_summary > BIG_BREACKPOINT:
             return 'cards/question/big_question.html'
     return 'cards/question/question.html'
+
+@register.filter
+def get_avatar(user):
+    try:
+        user.profile.avatar.file
+        return user.profile.avatar
+    except:
+        return 'img/default_avatar.jpg'
